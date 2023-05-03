@@ -1,68 +1,80 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>How long till Misato Monday</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X0G9NQPX0D"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        
-        gtag('config', 'G-X0G9NQPX0D');
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How long till Monday</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 3rem);
+        }
+        #week-countdown {
+            font-size: 3rem;
+            text-align: center;
+            margin: 0 0 2rem 0;
+        }
+        #misato-monday {
+            display: none;
+            text-align: center;
+        }
+    </style>
 </head>
-<style>
-h1 {
-  text-align: center;
-}
-@import url(https://fonts.googleapis.com/css?family=Lato:100,400);
-#week-countdown {
-  background: #CCC;
-  font-family: 'Lato', sans-serif;
-  text-align: center;
-  color: #000;
-  padding: 1rem 0;
-  font-size: 3rem;
-}
-#misato-monday {
-    display: none;
-    text-align: center;
-}
-</style>
 <body>
-    <h1>How long till Misato Monday?</h1>
-    <div id="week-countdown">
-        <p></p>
-    </div>
-    <div id="misato-monday">
-        <p>It's Misato Monday!</p>
-        <img src="misato.jpg">
-        <audio id="misato-audio" src="Misato.mp3" loop></audio>
+    <header>
+        <h1>How long till Misato Monday?</h1>
+    </header>
+    <div class="container">
+        <div id="week-countdown"></div>
+        <div id="misato-monday">
+            <p>It's Misato Monday!</p>
+            <img src="misato.jpg">
+            <audio id="audio" src="Misato.mp3" loop></audio>
+        </div>
     </div>
     <script>
-        setInterval(function time(){
-            var d = new Date();
-            var days = 7 - d.getDay();
-            var hours = 24 - d.getHours();
-            var min = 60 - d.getMinutes();
-            if((min + '').length == 1){
-                min = '0' + min;
-            }
-            var sec = 60 - d.getSeconds();
-            if((sec + '').length == 1){
-                sec = '0' + sec;
-            }
-            jQuery('#week-countdown p').html(days+'d : '+hours+'h : '+min+'m : '+sec+'s ');
-            if (d.getDay() == 1) {
-                jQuery('#week-countdown').hide();
-                jQuery('#misato-monday').show();
-                jQuery('#misato-audio').prop('autoplay', true);
+        function updateCountdown() {
+            const now = new Date();
+            const daysUntilMonday = (1 + 7 - now.getDay()) % 7;
+            const hoursUntilMonday = 24 - now.getHours() - 1;
+            const minutesUntilMonday = 60 - now.getMinutes() - 1;
+            const secondsUntilMonday = 60 - now.getSeconds() - 1;
+
+            const countdown = `${daysUntilMonday}d : ${hoursUntilMonday}h : ${minutesUntilMonday}m : ${secondsUntilMonday}s`;
+            document.querySelector("#week-countdown").textContent = countdown;
+
+            if (daysUntilMonday === 0 && hoursUntilMonday === 0 && minutesUntilMonday === 0 && secondsUntilMonday === 0) {
+                document.querySelector("#week-countdown").style.display = "none";
+                document.querySelector("#misato-monday").style.display = "block";
+                document.querySelector("#audio").play();
             } else {
-                jQuery('#misato-monday').hide();
-                jQuery('#week-countdown').show();
-                jQuery('#misato-audio').prop('autoplay', false);
+                document.querySelector("#week-countdown").style.display = "block";
+                document.querySelector("#misato-monday").style.display = "none";
+                document.querySelector("#audio").pause();
             }
-        }, 1000);
+        }
+
+        setInterval(updateCountdown, 1000);
     </script>
-<body>
+</body>
+</html>
