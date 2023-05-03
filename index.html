@@ -1,8 +1,7 @@
-<!Doctype html>
+<!DOCTYPE html>
 <head>
-    <title> How long till misato monday </title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="jquery-3.6.4.min.js"></script>
+    <title>How long till Misato Monday</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <style>
 h1 {
@@ -17,11 +16,20 @@ h1 {
   padding: 1rem 0;
   font-size: 3rem;
 }
+#misato-monday {
+    display: none;
+    text-align: center;
+}
 </style>
 <body>
-    <h1> How long till Misato Monday? </h1>
+    <h1>How long till Misato Monday?</h1>
     <div id="week-countdown">
         <p></p>
+    </div>
+    <div id="misato-monday">
+        <p>It's Misato Monday!</p>
+        <img src="misato-image.jpg">
+        <audio src="misato-song.mp3" autoplay loop></audio>
     </div>
     <script>
         setInterval(function time(){
@@ -36,7 +44,14 @@ h1 {
             if((sec + '').length == 1){
                 sec = '0' + sec;
             }
-            jQuery('#week-countdown p').html(days+'d : '+hours+'h : '+min+'m : '+sec+'s ')
+            jQuery('#week-countdown p').html(days+'d : '+hours+'h : '+min+'m : '+sec+'s ');
+                if (d.getDay() == 1) {
+                    jQuery('#week-countdown').hide();
+                    jQuery('#misato-monday').show();
+                } else {
+                    jQuery('#misato-monday').hide();
+                    jQuery('#week-countdown').show();
+                }
         }, 1000);
     </script>
-</body>
+<body>
