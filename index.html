@@ -41,6 +41,11 @@ h1 {
         <audio src="Misato.mp3" autoplay loop></audio>
     </div>
     <script>
+        var d = new Date();
+        if (d.getDay() == 1) {
+            jQuery('#week-countdown').hide();
+            jQuery('#misato-monday').show();
+        }
         setInterval(function time(){
             var d = new Date();
             var days = 7 - d.getDay();
@@ -54,13 +59,6 @@ h1 {
                 sec = '0' + sec;
             }
             jQuery('#week-countdown p').html(days+'d : '+hours+'h : '+min+'m : '+sec+'s ');
-                if (d.getDay() == 1) {
-                    jQuery('#week-countdown').hide();
-                    jQuery('#misato-monday').show();
-                } else {
-                    jQuery('#misato-monday').hide();
-                    jQuery('#week-countdown').show();
-                }
         }, 1000);
     </script>
 <body>
