@@ -1,0 +1,42 @@
+<!Doctype html>
+<head>
+    <title> How long till misato monday </title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="jquery-3.6.4.min.js"></script>
+</head>
+<style>
+h1 {
+  text-align: center;
+}
+@import url(https://fonts.googleapis.com/css?family=Lato:100,400);
+#week-countdown {
+  background: #CCC;
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  color: #000;
+  padding: 1rem 0;
+  font-size: 3rem;
+}
+</style>
+<body>
+    <h1> How long till Misato Monday? </h1>
+    <div id="week-countdown">
+        <p></p>
+    </div>
+    <script>
+        setInterval(function time(){
+            var d = new Date();
+            var days = 7 - d.getDay();
+            var hours = 24 - d.getHours();
+            var min = 60 - d.getMinutes();
+            if((min + '').length == 1){
+                min = '0' + min;
+            }
+            var sec = 60 - d.getSeconds();
+            if((sec + '').length == 1){
+                sec = '0' + sec;
+            }
+            jQuery('#week-countdown p').html(days+'d : '+hours+'h : '+min+'m : '+sec+'s ')
+        }, 1000);
+    </script>
+</body>
