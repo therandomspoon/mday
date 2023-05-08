@@ -63,7 +63,7 @@
             const countdown = `${daysUntilMonday}d : ${hoursUntilMonday}h : ${minutesUntilMonday}m : ${secondsUntilMonday}s`;
             document.querySelector("#week-countdown").textContent = countdown;
 
-            if (daysUntilMonday === 0 && hoursUntilMonday === 0 && minutesUntilMonday === 0 && secondsUntilMonday === 0) {
+            if (daysUntilMonday === 0) {
                 document.querySelector("#week-countdown").style.display = "none";
                 document.querySelector("#misato-monday").style.display = "block";
                 document.querySelector("#audio").play();
